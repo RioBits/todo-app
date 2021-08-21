@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import './styles/App.sass'
+import CreatePost from './Components/CreatePost'
+import Todos from './Components/Todos'
+import TodosContext from './TodosContext'
+import { useEffect, useState } from 'react'
 
 function App() {
+  const [todos, setTodos] = useState([])
+
+  useEffect(() => {
+    const localTodos = localStorage.getItem('todos')
+    if (!localTodos) {
+      localStorage.setItem('todos', JSON.stringify([]))
+    } else {
+      const parsedTodos = JSON.parse(localTodos)
+      setTodos(parsedTodos)
+    }
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <header>TODO</header>
+      <div className="App">
+        <div className="container">
+          <TodosContext.Provider value={[todos, setTodos]}>
+            <CreatePost />
+            <Todos />
+          </TodosContext.Provider>
+        </div>
+      </div>
+    </>
+  )
 }
 
-export default App;
+export default App
