@@ -42,7 +42,13 @@ const Todo = ({ title, isCompleted, id }) => {
         icon={faMinusSquare}
         onClick={() => handleDelete()}
       />
-      <span>{title}</span>
+      <span
+        style={
+          isCompleted ? { textDecoration: 'line-through', color: '#999' } : null
+        }
+      >
+        {title}
+      </span>
     </div>
   )
 }
