@@ -13,13 +13,16 @@ const CreatePost = () => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (!title) {
+
+    const titleInput = title.trim()
+
+    if (!titleInput.split('').length) {
       return setErrorMessage('Please fill the title.')
     }
 
     if (errorMessage) setErrorMessage('')
 
-    const newTodos = [...todos, { id: uuid(), title, isCompleted }]
+    const newTodos = [{ id: uuid(), title: titleInput, isCompleted }, ...todos]
 
     localStorage.setItem('todos', JSON.stringify(newTodos))
     setTodos(newTodos)
@@ -45,8 +48,8 @@ const CreatePost = () => {
           <span style={{ marginRight: '0.5rem' }}>Completed:</span>
           <input
             type="checkbox"
-            value={isCompleted}
-            onChange={(e) => setIsCompleted(e.target.value)}
+            checked={isCompleted}
+            onChange={(e) => setIsCompleted(e.target.checked)}
           />
         </div>
       </label>
