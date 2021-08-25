@@ -1,6 +1,10 @@
 import { useState, useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
+import {
+  faPlusSquare,
+  faCheckSquare,
+  faSquare,
+} from '@fortawesome/free-solid-svg-icons'
 import { v1 as uuid } from 'uuid'
 
 import TodosContext from '../TodosContext'
@@ -17,6 +21,7 @@ const CreatePost = () => {
     const titleInput = title.trim()
 
     if (!titleInput.split('').length) {
+      setTitle('')
       return setErrorMessage('Please fill the title.')
     }
 
@@ -30,29 +35,23 @@ const CreatePost = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Create Todo ✅</h2>
+    <form className="create-todo" onSubmit={handleSubmit}>
+      <h2>Create Todo ✔️</h2>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="title"
+      />
+      <label className="iscompleted">
+        <span>Completed:</span>
+        <FontAwesomeIcon
+          onClick={() => setIsCompleted((prev) => !prev)}
+          className="icon"
+          icon={isCompleted ? faCheckSquare : faSquare}
+        />
+      </label>
       {errorMessage ? <p className="error-msg">{errorMessage}</p> : null}
-      <label>
-        <div>
-          <p>Title:</p>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-      </label>
-      <label>
-        <div style={{ margin: '0.4rem 0' }}>
-          <span style={{ marginRight: '0.5rem' }}>Completed:</span>
-          <input
-            type="checkbox"
-            checked={isCompleted}
-            onChange={(e) => setIsCompleted(e.target.checked)}
-          />
-        </div>
-      </label>
       <button type="submit" className="add-btn">
         <FontAwesomeIcon icon={faPlusSquare} />
         <span>Add</span>

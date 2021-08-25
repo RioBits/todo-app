@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import Todo from './Todo'
 import TodosContext from '../TodosContext'
 import '../styles/todos.sass'
+import noTodos from './todos.svg'
 
 const Todos = () => {
   const [todos] = useContext(TodosContext)
@@ -11,7 +12,10 @@ const Todos = () => {
       {todos.length ? (
         todos.map((todo) => <Todo key={todo.id} {...todo} />)
       ) : (
-        <p className="no-todos">There is no todos, Let's add some!</p>
+        <div>
+          <img className="no-todos-image" src={noTodos} alt="React Logo" />
+          <p className="no-todos">There is no todos, Let's add some!</p>
+        </div>
       )}
     </div>
   )

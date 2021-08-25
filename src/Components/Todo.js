@@ -30,13 +30,11 @@ const Todo = ({ title, isCompleted, id }) => {
 
   return (
     <div title={title} className="todo">
-      <span onClick={handleCheck}>
-        {isCompleted ? (
-          <FontAwesomeIcon className="icon" icon={faCheckSquare} />
-        ) : (
-          <FontAwesomeIcon className="icon" icon={faSquare} />
-        )}
-      </span>
+      <FontAwesomeIcon
+        onClick={handleCheck}
+        className="icon"
+        icon={isCompleted ? faCheckSquare : faSquare}
+      />
       <FontAwesomeIcon
         className="icon delete-btn"
         icon={faMinusSquare}
