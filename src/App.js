@@ -18,17 +18,12 @@ function App() {
   }, [])
 
   return (
-    <>
-      <header>TODO</header>
-      <div className="App">
-        <div className="container">
-          <TodosContext.Provider value={[todos, setTodos]}>
-            <CreatePost />
-            <Todos />
-          </TodosContext.Provider>
-        </div>
-      </div>
-    </>
+    <div className="App">
+      <TodosContext.Provider value={[todos, setTodos]}>
+        <CreatePost />
+        <Todos />
+      </TodosContext.Provider>
+    </div>
   )
 }
 
