@@ -41,6 +41,7 @@ const Todo = ({ title, isCompleted, id }) => {
         onClick={() => handleDelete()}
       />
       <span
+        onClick={handleCheck}
         style={
           isCompleted ? { textDecoration: 'line-through', color: '#999' } : null
         }
