@@ -1,29 +1,19 @@
-import './styles/App.sass'
-import CreatePost from './Components/CreatePost'
-import Todos from './Components/Todos'
-import TodosContext from './TodosContext'
-import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Header from './Components/Nav'
+import Notification from './Components/Notification'
+import Tasks from './Screens/Tasks'
+import Focus from './Screens/Focus'
 
 function App() {
-  const [todos, setTodos] = useState([])
-
-  useEffect(() => {
-    const localTodos = localStorage.getItem('todos')
-    if (!localTodos) {
-      localStorage.setItem('todos', JSON.stringify([]))
-    } else {
-      const parsedTodos = JSON.parse(localTodos)
-      setTodos(parsedTodos)
-    }
-  }, [])
-
   return (
-    <div className="App">
-      <TodosContext.Provider value={[todos, setTodos]}>
-        <CreatePost />
-        <Todos />
-      </TodosContext.Provider>
-    </div>
+    <Router>
+      <Notification text="More Focus Features Coming Soon.." />
+      <Header />
+      <Switch>
+        <Route path="/" exact component={Tasks} />
+        <Route path="/pomodoro" component={Focus} />
+      </Switch>
+    </Router>
   )
 }
 
