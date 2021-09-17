@@ -1,4 +1,4 @@
-import CreatePost from '../Components/CreatePost'
+import CreateTodo from '../Components/CreateTodo'
 import Todos from '../Components/Todos'
 import TodosContext from '../TodosContext'
 import { useEffect, useState } from 'react'
@@ -20,7 +20,7 @@ function Tasks() {
   return (
     <div className="Tasks">
       <TodosContext.Provider value={[todos, setTodos]}>
-        <CreatePost />
+        <CreateTodo />
         <Todos />
       </TodosContext.Provider>
     </div>
