@@ -7,7 +7,6 @@ import TodosContext from '../TodosContext'
 
 const CreatePost = forwardRef((_, ref) => {
   const [title, setTitle] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
   const [todos, setTodos] = useContext(TodosContext)
 
   function handleSubmit(e) {
@@ -17,10 +16,8 @@ const CreatePost = forwardRef((_, ref) => {
 
     if (!titleInput.split('').length) {
       setTitle('')
-      return setErrorMessage('Please fill the title.')
+      return alert('Please fill the title.')
     }
-
-    if (errorMessage) setErrorMessage('')
 
     const newTodos = [
       { id: uuid(), title: titleInput, isCompleted: false },
@@ -45,7 +42,6 @@ const CreatePost = forwardRef((_, ref) => {
         <FontAwesomeIcon icon={faPlusSquare} />
         <span>Add</span>
       </button>
-      {errorMessage ? <p className='error-msg'>{errorMessage}</p> : null}
     </form>
   )
 })
