@@ -1,17 +1,12 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, forwardRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faPlusSquare,
-  faCheckSquare,
-  faSquare,
-} from '@fortawesome/free-solid-svg-icons'
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 import { v1 as uuid } from 'uuid'
 
 import TodosContext from '../TodosContext'
 
-const CreatePost = () => {
+const CreatePost = forwardRef((_, ref) => {
   const [title, setTitle] = useState('')
-  const [isCompleted, setIsCompleted] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [todos, setTodos] = useContext(TodosContext)
 
@@ -27,7 +22,10 @@ const CreatePost = () => {
 
     if (errorMessage) setErrorMessage('')
 
-    const newTodos = [{ id: uuid(), title: titleInput, isCompleted }, ...todos]
+    const newTodos = [
+      { id: uuid(), title: titleInput, isCompleted: false },
+      ...todos,
+    ]
 
     localStorage.setItem('todos', JSON.stringify(newTodos))
     setTodos(newTodos)
@@ -35,29 +33,21 @@ const CreatePost = () => {
   }
 
   return (
-    <form className="create-todo" onSubmit={handleSubmit}>
-      <h2>Create Todo ✔️</h2>
+    <form className='create-todo' onSubmit={handleSubmit}>
       <input
-        type="text"
+        ref={ref}
+        type='text'
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="title"
+        placeholder='Create Todo ✅'
       />
-      <label className="iscompleted">
-        <span>Completed:</span>
-        <FontAwesomeIcon
-          onClick={() => setIsCompleted((prev) => !prev)}
-          className="icon"
-          icon={isCompleted ? faCheckSquare : faSquare}
-        />
-      </label>
-      {errorMessage ? <p className="error-msg">{errorMessage}</p> : null}
-      <button type="submit" className="add-btn">
+      <button type='submit' className='add-btn'>
         <FontAwesomeIcon icon={faPlusSquare} />
         <span>Add</span>
       </button>
+      {errorMessage ? <p className='error-msg'>{errorMessage}</p> : null}
     </form>
   )
-}
+})
 
 export default CreatePost

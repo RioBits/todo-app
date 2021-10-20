@@ -1,0 +1,33 @@
+.create
+  position: fixed;
+  width: 4rem;
+  right: 40px
+  bottom: 40px
+  cursor: pointer
+
+.add-icon
+  transition: transform .3s
+
+.add-active
+  transform: rotate(-45deg)
+
+.form
+  position: absolute
+  top: -100px
+  left: 0
+  right: 0
+  max-width: 980px
+  width: 100%
+  margin: auto
+  opacity: 0
+  transition: opacity 0.3s, top 0.3s
+
+.visible-form
+  top: auto
+  opacity: 1
+
+
+@media screen and (max-width: 920px)
+  .create
+    right: 15px
+    bottom: 15px
