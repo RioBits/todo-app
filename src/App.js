@@ -7,14 +7,11 @@ import Focus from './Screens/Focus'
 function App() {
   return (
     <Router>
-      <Notification
-        text="🐛 BUG FIX: The Timer will continue to run even when browsing tasks."
-        bg="#835fff"
-      />
+      <Notification text='📢 Better UX.' bg='#000' center />
       <Header />
       <Switch>
-        <Route path="/" exact component={Tasks} />
-        <Route path="/pomodoro" component={Focus} />
+        <Route path='/' exact component={Tasks} />
+        <Route path='/pomodoro' component={Focus} />
       </Switch>
     </Router>
   )
